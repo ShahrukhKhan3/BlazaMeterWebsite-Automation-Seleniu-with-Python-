@@ -1,172 +1,115 @@
+import pytest
 from selenium import webdriver
+from selenium.webdriver.common.bidi.browser import Browser
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-driver = webdriver.Firefox()
 
-wait = WebDriverWait(driver, 10)
+class TestMyPytest():
 
+    def test_open_website(self,Browser):
+        assert "STORE" in Browser.title
+    def test_click_signup(self,Browser):
+        Browser.find_element(By.ID, "signin2").click()
+        time.sleep(3)
+        Browser.find_element(By.ID, "sign-username").send_keys("Shahrukh")
+        Browser.find_element(By.ID, "sign-password").send_keys("12345")
+        Browser.find_element(By.XPATH, "//button[text()='Sign up']").click()
+        time.sleep(5)
+    def test_signup_alert(self,Browser):
+         alert = Browser.switch_to.alert
+         print(alert.text)
+         alert.accept()
+         time.sleep(5)
 
-def open_website():
-    driver.get("https://demoblaze.com/")
+    def test_signup_close(self,Browser):
+         # Browser.find_element(By.XPATH, "/html/body/div[2]/div/div/div[3]/button[1]").click()
+        Browser.find_element(By.XPATH, "/html/body/div[2]/div/div/div[3]/button[1]").click()
+        time.sleep(6)
+    def test_click_login(self,Browser):
+         Browser.find_element(By.ID, "login2").click()
+    def test_enter_username(self,Browser):
+         time.sleep(2)
+         Browser.find_element(By.ID, "loginusername").send_keys("Shahrukh")
+    def test_enter_password(self,Browser):
+         Browser.find_element(By.ID, "loginpassword").send_keys("12345")
 
+    def test_click_login_button(self,Browser):
+         Browser.find_element(By.XPATH, "//button[text()='Log in']").click()
+         time.sleep(7)
+    def test_Click_Product(self,Browser):
+        product = Browser.find_element(By.LINK_TEXT, "Samsung galaxy s6")
+        product.click()
+        time.sleep(5)
+    def test_AddTocart(self,Browser):
+        Addtocartbtn = Browser.find_element(By.LINK_TEXT, "Add to cart")
+        Addtocartbtn.click()
+        time.sleep(6)
+    def test_Dialogue(self,Browser):
+        alert = Browser.switch_to.alert
+        print(alert.text)
+        alert.accept()   # ✅ THIS IS MISSING IN YOUR CODE
+    def test_Cart(self,Browser):
+        Addtocartmenulink = Browser.find_element(By.ID, "cartur")
+        Addtocartmenulink.click()
+        time.sleep(5)
+    def test_PlaceOrder(self,Browser):
+        Orderplacebtn = Browser.find_element(By.XPATH, "/html/body/div[6]/div/div[2]/button")
+        Orderplacebtn.click()
+        time.sleep(6)
+    def test_PlaceOrderDialogueN(self,Browser):
+        Orderplacebtn = Browser.find_element(By.ID, "name").send_keys("shahrukh")
+    def test_PlaceOrderDialogueC(self,Browser):
+        Orderplacebtn1 = Browser.find_element(By.ID, "card").send_keys("4111 1111 1111 1111")
+    # def test_PlaceOrderDialogueN(self,Browser):
+    #     Browser.find_element(By.ID, "name").send_keys("shahrukh")
+    #  def test_PlaceOrderDialogueC(self,Browser):
+    #     Browser.find_element(By.ID, "card").send_keys("4111 1111 1111 1111")
+    def test_Purchase(self,Browser):
+        purchase_btn = Browser.find_element(By.CSS_SELECTOR,"#orderModal > div > div > div.modal-footer > button.btn.btn-primary")
+        purchase_btn.click()
+        time.sleep(4)
 
-def click_signup():
-    driver.find_element(By.ID, "signin2").click()
-
-
-def sign_username():
-    wait.until(
-        EC.visibility_of_element_located((By.ID, "sign-username"))
-    ).send_keys("Shahrukh")
-
-
-def sign_password():
-    driver.find_element(By.ID, "sign-password").send_keys("12345")
-
-
-def click_signup_button():
-    driver.find_element(
-        By.XPATH,
-        "//button[text()='Sign up']"
-    ).click()
-def signup_alert():
-    wait.until(EC.alert_is_present())
-
-    alert = driver.switch_to.alert
-
-    print(alert.text)
-
-    alert.accept()
-def signup_close():
-    driver.find_element(By.XPATH, "/html/body/div[2]/div/div/div[3]/button[1]").click()
-
-def click_login():
-    driver.find_element(By.ID, "login2").click()
-
-
-def enter_username():
-    time.sleep(2)
-    driver.find_element(By.ID, "loginusername").send_keys("Shahrukh")
-
-
-def enter_password():
-    driver.find_element(By.ID, "loginpassword").send_keys("12345")
-
-
-def click_login_button():
-    driver.find_element(By.XPATH, "//button[text()='Log in']").click()
-    time.sleep(5)
-def Click_Product():
-    product = wait.until(
-        EC.element_to_be_clickable((By.LINK_TEXT, "Samsung galaxy s6"))
-
-    )
-    product.click()
-    time.sleep(5)
-def AddTocart():
-
-    Addtocartbtn = wait.until(
-        EC.element_to_be_clickable((By.LINK_TEXT, "Add to cart"))
-    )
-
-    Addtocartbtn.click()
-def Dialogue():
-
-    wait.until(EC.alert_is_present())
-
-    alert = driver.switch_to.alert
-
-    print(alert.text)
-
-    alert.accept()   # ✅ THIS IS MISSING IN YOUR CODE
-def Cart():
-    Addtocartmenulink = wait.until(
-        EC.element_to_be_clickable((By.ID, "cartur"))
-    )
-    Addtocartmenulink.click()
-    time.sleep(5)
-def PlaceOrder():
-
-    Orderplacebtn = wait.until(
-        EC.element_to_be_clickable(
-            (By.XPATH, "/html/body/div[6]/div/div[2]/button")
-        )
-    )
-
-    Orderplacebtn.click()
-def PlaceOrderDialogueN():
-
-    PODialogue = wait.until(
-        EC.element_to_be_clickable((By.ID, "name")))
-    PODialogue.send_keys("Shahrukh")
-    time.sleep(5)
-# Calling Functions
-def PlaceOrderDialogueC():
-
-    PODialogue = wait.until(
-        EC.element_to_be_clickable((By.ID, "card")))
-
-    PODialogue.send_keys("4111 1111 1111 1111")
+    # def test_Purchase(self,Browser):
+    #  purchase_btn = Browser.find_element(By.XPATH, "//button[text()='Purchase']")
+    #  time.sleep(1)
+    #  purchase_btn.click()
+    def test_OK(self,Browser):
+     ok_btn = Browser.find_element(By.XPATH, "//button[text()='OK']")
+     time.sleep(1)
+     ok_btn.click()
 
 
-def Purchase():
-    purchase_btn = wait.until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR,"#orderModal > div > div > div.modal-footer > button.btn.btn-primary")))
-    purchase_btn.click()
-
-
-def Purchase():
-
-    purchase_btn = wait.until(
-        EC.visibility_of_element_located((By.XPATH, "//button[text()='Purchase']"))
-    )
-
-    driver.execute_script("arguments[0].scrollIntoView(true);", purchase_btn)
-    time.sleep(1)
-
-    driver.execute_script("arguments[0].click();", purchase_btn)
-def OK():
-
-    ok_btn = wait.until(
-        EC.element_to_be_clickable((By.XPATH, "//button[text()='OK']"))
-    )
-
-    driver.execute_script("arguments[0].scrollIntoView(true);", ok_btn)
-    time.sleep(1)
-
-    driver.execute_script("arguments[0].click();", ok_btn)
-
-
-
-open_website()
-
-time.sleep(2)
-
-click_signup()
-
-sign_username()
-
-sign_password()
-
-click_signup_button()
-signup_alert()
-time.sleep(5)
-signup_close()
-time.sleep(5)
-click_login()
-enter_username()
-enter_password()
-click_login_button()
-Click_Product()
-AddTocart()
-Dialogue()
-time.sleep(5)
-Cart()
-PlaceOrder()
-PlaceOrderDialogueN()
-PlaceOrderDialogueC()
-Purchase()
-OK()
+#
+#
+#
+#
+# time.sleep(2)
+#
+# click_signup()
+#
+# sign_username()
+#
+# sign_password()
+#
+# click_signup_button()
+# signup_alert()
+# time.sleep(5)
+# signup_close()
+# time.sleep(5)
+# click_login()
+# enter_username()
+# enter_password()
+# click_login_button()
+# Click_Product()
+# AddTocart()
+# Dialogue()
+# time.sleep(5)
+# Cart()
+# PlaceOrder()
+# PlaceOrderDialogueN()
+# PlaceOrderDialogueC()
+# Purchase()
+# OK()
