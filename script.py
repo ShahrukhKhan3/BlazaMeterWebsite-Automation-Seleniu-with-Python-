@@ -14,7 +14,7 @@ class TestMyPytest():
     def test_click_signup(self,Browser):
         Browser.find_element(By.ID, "signin2").click()
         time.sleep(3)
-        Browser.find_element(By.ID, "sign-username").send_keys("Shahrukh")
+        Browser.find_element(By.ID, "sign-usernames").send_keys("Shahrukh")
         Browser.find_element(By.ID, "sign-password").send_keys("12345")
         Browser.find_element(By.XPATH, "//button[text()='Sign up']").click()
         time.sleep(5)
@@ -77,7 +77,7 @@ class TestMyPytest():
     #  time.sleep(1)
     #  purchase_btn.click()
     def test_OK(self,Browser):
-     ok_btn = Browser.find_element(By.XPATH, "//button[text()='OK']")
+     ok_btn = Browser.find_element(By.XPATH, "//button[text()='OKK']")
      time.sleep(1)
      ok_btn.click()
 
