@@ -2,6 +2,7 @@ import pytest
 from Test.Action import Action
 
 
+@pytest.mark.ui
 class TestPurchaseFlow:
 
     def test_purchase_flow(self, Browser):

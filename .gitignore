@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.idea/
+
+# reports/ and screenshots/ are deliberately tracked -- they are the evidence
+# this suite produces.
